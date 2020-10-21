@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<br>
+<br>
+<br>
+
+<div style="text-align:center;">
+    <input type="text" id="wid" placeholder="Nhap chieu rong"/>
+</div>
+<div style="text-align:center;">
+    <input type="text" id="hei" placeholder="Nhap chieu dai"/>
+</div>
+<div style="text-align:center;">
+    <input type="button" value="Draw" onclick="redraw()">
+</div>
+<br>
+<div align="center" id="rec"></div>
+<div align="center" id="area"></div>
+<div align="center" id="perimeter"></div>
+
+<script>
+
+    class Rectangle {
+        constructor(width, height) {//, area, perimeter
+            this.width = +width;
+            this.height = +height;
+            //this.area = area;
+            //this.perimeter = perimeter;
+        }
+
+        getWidth() {
+            return this.width;
+        }
+
+        getHeight() {
+            return this.height;
+        }
+
+        getArea() {
+            this.area = this.height * this.width;
+            return this.area;
+        }
+
+        getPerimeter() {
+            this.perimeter = 2 * (this.width + this.height);
+            return this.perimeter;
+        }
+
+        setWidth(width) {
+            this.width = width;
+        }
+
+        setHeight(height) {
+            this.height = height;
+        }
+    }
+
+    function drawRectangle() {
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.rect(20, 20, 150, 100);
+        ctx.stroke();
+    }
+
+    function redraw() {
+        let getWidth = document.getElementById("wid").value;
+        let getHeight = document.getElementById("hei").value;
+        if (!getWidth) {
+            getWidth = 300;
+        }
+        if (!getHeight) {
+            getHeight = 150;
+        }
+
+        let rectan = new Rectangle(getWidth, getHeight);
+
+        let sout = '<canvas id="myCanvas" width="' + rectan.getWidth() + '" height="' + rectan.getHeight() + '" style="border:2px solid #d3d3d3;">';
+        document.getElementById("rec").innerHTML = sout;
+        document.getElementById("area").innerHTML = "<br>Dien tich hcn la: " + rectan.getArea() + " (dvdt)";
+        document.getElementById("perimeter").innerHTML = "Chu vi hcn la: " + rectan.getPerimeter() + " (dvcv)";
+
+        drawRectangle();
+    }
+
+
+</script>
+
+
+</body>
+</html>

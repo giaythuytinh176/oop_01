@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    // Mô tả
+    // Viết một lớp các đối tượng mô tả loại dữ liệu nhiệt độ lấy tên là Temperature. Các thông số mô tả cho nhiệt độ gồm:
+    //
+    //     Trị số tính theo đơn vị độ C (giá trị nhỏ nhất -273 độ)
+    //
+    // Có tính năng chuyển đổi từ độ C sang độ F.
+    //
+    //     Có tính năng chuyển đổi từ độ C sang độ Kenvin.
+    //
+    //     Sử dụng lớp vừa định nghĩa để xây dựng một chương trình JavaScript với kịch bản như sau:
+    //
+    //     Khởi tạo một đối tượng Temperature.
+    //
+    //     Gán giá trị độ C cho đối tượng ở nhiệt độ 25 độ.
+    //
+    //     Hiển thị ra màn hình nhiệt độ F và độ Kenvin tương ứng.
+    //
+    //     Để hoàn thành bài thực hành, học viên cần:
+    //
+    //     Đưa mã nguồn lên GitHub
+    // Dán link của repository lên phần nộp bài trên CodeGymX
+    // Hướng dẫn
+    // Khai báo lớp Temperature với các thuộc tính cần thiết
+    // Khai báo các phương thức chuyển đổi nhiệt độ
+    // Tạo đối tượng và thực hiện các bước theo kịch bản
+    //
+
+    // C = K − 273.15   (K − 273.15) * 9/5 + 32 = F  F = C * 9/5 + 32
+    class Temperature {
+        constructor(tempC) {//, tempF, tempK
+            this.tempC = tempC;
+            //this.tempF = tempF;
+            //this.tempK = tempK;
+
+            if (this.tempC < -273) {
+                console.log(this.tempC)
+            }
+
+        }
+
+        addC(tempC) {
+            this.tempC = tempC;
+        }
+
+        addF(tempF) {
+            this.tempF = tempF;
+        }
+
+        addK(tempK) {
+            this.tempK = tempK;
+        }
+
+        resC() {
+            return this.tempC;
+        }
+
+        resF() {
+            return this.tempF;
+        }
+
+        resK() {
+            return this.tempK;
+        }
+
+        getC2F() {
+            return this.tempC * 9 / 5 + 32;
+        }
+
+        getF2C() {
+            return (this.tempF - 32) * 5 / 9;
+        }
+
+        getC2K() {
+
+            return this.tempC + 273.15;
+        }
+
+        getK2C() {
+
+            return this.tempK - 273.15;
+        }
+
+        getK2F() {
+            return (this.tempK - 273.15) * 9 / 5 + 32;
+        }
+
+        getF2K() {
+            return (this.tempF - 32) * 5 / 9 + 273.15;
+        }
+
+    }
+
+    let processTemp = new Temperature(25);
+
+    //processTemp.addC(25);
+
+    console.log(processTemp.getC2F());
+    console.log(processTemp.getC2K());
+
+
+</script>
+
+</body>
+</html>

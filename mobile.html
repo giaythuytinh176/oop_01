@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo mobile</title>
+
+    <style>
+        fieldset {
+            text-align: center;
+            display: inline-block;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<select id="phone">
+    <option value="iPhone">iPhone</option>
+    <option value="samSung">samSung</option>
+</select>
+<input type="button" onclick="turnOff()" value="TurnOff">
+
+<br>
+<br>
+<br>
+
+
+<fieldset>
+
+    iPhone 12 <br>
+    <textarea id="inbox-mess-iphone" disabled placeholder="Inbox" type="inbox-iphone"></textarea>
+    <br>
+    <textarea id="outbox-mess-iphone" disabled placeholder="Outbox" type="outbox-iphone"></textarea>
+    <br>
+    <input type="text" id="mess-iphone" placeholder="Type message here"> <input type="submit" onclick="sendMess()"
+                                                                                value="Send">
+
+    <br></fieldset>
+<fieldset>
+
+    <br>
+    Samsung <br>
+    <textarea id="inbox-mess-samsung" disabled placeholder="Inbox" type="inbox-samsung"></textarea>
+    <br>
+    <textarea id="outbox-mess-samsung" disabled placeholder="Outbox" type="outbox-samsung"></textarea>
+    <br>
+    <input type="text" id="mess-samsung" placeholder="Type message here"> <input type="submit" onclick="sendMess1()"
+                                                                                 value="Send">
+
+
+</fieldset>
+
+
+<script>
+
+    class Mobile {
+        constructor(name) {
+            this.name = name;
+            this.battery = 50;
+            this.inbox = [];
+            this.outbox = [];
+            this.status = true;
+            this.message = '';
+        }
+
+        isOn() {
+            return this.status;
+        }
+
+        turnOff() {
+            this.status = false;
+            this.battery -= 1;
+        }
+
+        changeBattery() {
+            if (this.battery < 100) {
+                this.battery += 1;
+            }
+        }
+
+        writeMsg(message) {
+            this.message = message;
+        }
+
+        takeMsg(msg) {
+            this.inbox.push(msg);
+        }
+
+        sendMesseage(phone) {
+            phone.inbox.push(this.message);
+            this.outbox.push(this.message);
+        }
+
+        isBatteryFull() {
+            return this.battery == 100;
+        }
+    }
+
+    let iPhone = new Mobile("iPhone");
+    let samSung = new Mobile("SamSung");
+    //iPhone.writeMsg("abcd123");
+    //iPhone.sendMesseage(samSung);
+
+    //console.log(iPhone);
+    //console.log(samSung);
+
+    function sendMess() {
+        let getMess = document.getElementById("mess-iphone").value;
+        // console.log(getMess)
+        iPhone.writeMsg(getMess);
+        iPhone.sendMesseage(samSung);
+        document.getElementById("mess-iphone").value = '';
+        getMess = iPhone.outbox.join("\n");
+        document.getElementById("outbox-mess-iphone").innerHTML = getMess;
+        document.getElementById("inbox-mess-samsung").innerHTML = getMess;
+    }
+
+    function sendMess1() {
+        let getMess = document.getElementById("mess-samsung").value;
+        // console.log(getMess)
+        samSung.writeMsg(getMess);
+        samSung.sendMesseage(iPhone);
+        document.getElementById("mess-samsung").value = '';
+        getMess = samSung.outbox.join("\n");
+        document.getElementById("outbox-mess-samsung").innerHTML = getMess;
+        document.getElementById("inbox-mess-iphone").innerHTML = getMess;
+    }
+
+
+    function turnOff() {
+        let mobile = document.getElementById("phone").value;
+        if (mobile == "iPhone") {
+            iPhone.turnOff();
+            // console.log(iPhone);
+        }
+        if (mobile == "samSung") {
+            samSung.turnOff();
+            //console.log(samSung);
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

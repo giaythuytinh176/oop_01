@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<select id="mobile_type">
+    <option value="nokia">Bật Nokia</option>
+    <option value="iphone">Bật Iphone</option>
+</select>
+<button type="button" onclick="turnOn()">Bật</button>
+<button type="button" onclick="turnOff()">Tắt</button>
+<button type="button" onclick="sacPin()">Sạc</button>
+</body>
+</html>
+<script>
+    // Có một thông số về trạng thái pin tính bằng đơn vị số nguyên (tối đa 100 đv)
+    // Có một vùng nhớ dùng để lưu tin nhắn đang soạn thảo.
+    //     Có một vùng nhớ dùng để lưu tin nhắn trong hộp thư đến.
+    //     Có một vùng nhớ dùng để lưu tin nhắn đã gửi.
+    //     Có chức năng kiểm tra trạng thái điện thoại bật hay tắt.
+    //     Có chức năng bật và tắt điện thoại.
+    //     Có chức năng xạc pin điện thoại.
+    //     Có chức năng soạn tin nhắn.
+    //     Có chức năng nhận tin nhắn từ một chiếc mobile khác.
+    //     Có chức năng gửi tin nhắn tới một chiếc mobile khác.
+    //     Có chức năng xem tin trong hộp thư đến.
+    //     Có chức năng xem tin đã gửi.
+    //     Sau mỗi lần sử dụng một chức năng, năng lượng pin sẽ giảm đi một đơn vị.
+    //     Các chức năng không thể hoạt động nếu điện thoại chưa bật.
+    //
+    function Battery(enegy) {
+        this.enegy = enegy;
+        this.truPin = function () {
+            this.enegy -= 1;
+        }
+        this.sacPin = function () {
+            if (this.enegy < 100) {
+                this.enegy += 1;
+            } else {
+                alert("Pin đầy")
+            }
+        }
+    }
+
+    function Mobile(name, message, status, battery) {
+        this.name = name;
+        this.message = message;
+        this.status = status;
+        this.battery = battery
+        this.turnOff = function () {
+            this.status = "Điện thoại đang tắt";
+        }
+        this.turnOn = function () {
+            this.status = "Điện thoại đang bật";
+            this.battery.truPin();
+        }
+    }
+
+    var pin = new Battery(100);
+    var pinNokia = new Battery(50);
+    var iphone8 = new Mobile("Iphone 8", "", false, pin);
+    var nokia = new Mobile("Nokia", "", false, pinNokia);
+
+    function turnOff() {
+        iphone8.turnOff();
+        console.log(iphone8);
+    }
+
+    function turnOn() {
+        var type = document.getElementById("mobile_type").value;
+        if (type == "nokia") {
+            nokia.turnOn();
+            console.log(nokia);
+        } else {
+            iphone8.turnOn();
+            console.log(iphone8);
+        }
+    }
+
+    function sacPin() {
+        iphone8.battery.sacPin();
+        console.log(iphone8.battery.enegy);
+    }
+
+
+</script>

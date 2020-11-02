@@ -24,6 +24,10 @@
 <div align="center" id="area"></div>
 <div align="center" id="perimeter"></div>
 
+<canvas id="myCanvas" width="500" height="250" style="border:0px solid #d3d3d3;">;
+
+
+
 <script>
 
     class Rectangle {
@@ -62,11 +66,12 @@
 
     }
 
-    function drawRectangle() {
+    function drawRectangle(a, b) {
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
         ctx.beginPath();
-        ctx.rect(20, 20, 150, 100);
+        ctx.fillRect(20, 20, a, b);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
         ctx.stroke();
     }
 
@@ -82,12 +87,12 @@
 
         let rectan = new Rectangle(getWidth, getHeight);
 
-        let sout = '<canvas id="myCanvas" width="' + rectan.getWidth() + '" height="' + rectan.getHeight() + '" style="border:2px solid #d3d3d3;">';
-        document.getElementById("rec").innerHTML = sout;
+       // let sout = '<canvas id="myCanvas" width="' + rectan.getWidth() + '" height="' + rectan.getHeight() + '" style="border:2px solid #d3d3d3;">';
+        //document.getElementById("rec").innerHTML = sout;
         document.getElementById("area").innerHTML = "<br>Dien tich hcn la: " + rectan.getArea() + " (dvdt)";
         document.getElementById("perimeter").innerHTML = "Chu vi hcn la: " + rectan.getPerimeter() + " (dvcv)";
 
-        drawRectangle();
+        drawRectangle(getWidth, getHeight);
     }
 
 
